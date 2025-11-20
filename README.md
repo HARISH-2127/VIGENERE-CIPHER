@@ -1,5 +1,10 @@
 # VIGENERE-CIPHER
-## EX. NO: 4
+
+## NAME: HARISH S
+
+## REG NO: 212224040105
+
+
  
 
 ## IMPLEMETATION OF VIGENERE CIPHER
@@ -31,6 +36,61 @@ STEP-8: Repeat the above steps to generate the entire cipher text.
 
 ## PROGRAM
 
+```
+#include <stdio.h>
+#include <string.h>
+
+void encryptVigenere(char *plaintext, char *key, char *ciphertext) {
+    int textLength = strlen(plaintext);
+    int keyLength = strlen(key);
+
+    for (int i = 0, j = 0; i < textLength; i++) {
+        if (plaintext[i] >= 'A' && plaintext[i] <= 'Z') {
+            ciphertext[i] = ((plaintext[i] - 'A' + (key[j % keyLength] - 'A')) % 26) + 'A';
+            j++;
+        } else {
+            ciphertext[i] = plaintext[i];
+        }
+    }
+    ciphertext[textLength] = '\0';
+}
+
+void decryptVigenere(char *ciphertext, char *key, char *plaintext) {
+    int textLength = strlen(ciphertext);
+    int keyLength = strlen(key);
+
+    for (int i = 0, j = 0; i < textLength; i++) {
+        if (ciphertext[i] >= 'A' && ciphertext[i] <= 'Z') {
+            plaintext[i] = ((ciphertext[i] - 'A' - (key[j % keyLength] - 'A') + 26) % 26) + 'A';
+            j++;
+        } else {
+            plaintext[i] = ciphertext[i];
+        }
+    }
+    plaintext[textLength] = '\0';
+}
+
+int main() {
+    char plaintext[100], key[100], ciphertext[100], decryptedText[100];
+
+    printf("Enter the plaintext (uppercase letters only): ");
+    scanf("%s", plaintext);
+    printf("Enter the key (uppercase letters only): ");
+    scanf("%s", key);
+
+    encryptVigenere(plaintext, key, ciphertext);
+    printf("Encrypted Text: %s\n", ciphertext);
+
+    decryptVigenere(ciphertext, key, decryptedText);
+    printf("Decrypted Text: %s\n", decryptedText);
+
+    return 0;
+}
+```
+
 ## OUTPUT
 
+<img width="456" alt="Screenshot 2025-03-27 091535" src="https://github.com/user-attachments/assets/4108c72c-efae-45d6-9dcf-5e3c58127819" />
+
 ## RESULT
+THUS THE PROGRAM IS SUCCESSFULLY IMPLEMENTED.
